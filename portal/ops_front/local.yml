@@ -1,0 +1,11 @@
+version: '3'
+services:
+  ops_front:
+    container_name: ops_front_local
+    # restart: always
+    build:  
+      context: .
+      dockerfile: Dockerfile-local
+    image: ops_front_image
+    ports:
+      - "81:80"

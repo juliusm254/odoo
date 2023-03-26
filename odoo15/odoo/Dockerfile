@@ -1,0 +1,2 @@
+ARG ODOO_VERSION
+FROM ghcr.io/tecnativa/doodba@sha256:10c6433390a29a1afe73f7736ad11cb0e9bbe7f2c7c142af1411bd2871d14944
