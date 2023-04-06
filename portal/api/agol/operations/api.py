@@ -7,7 +7,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from .models import SafetyChecklist
-# from customers.serializers import OrderSerializer
+from customers.serializers import CustomerSerializer
+from customers.models import Order
 from .services import checklist_create, lab_create, loading_create, lab_results_create
 from .selectors import order_list, checklist_details, labinspection_details, checklist_details_list, get_order
 from .utils import create_pdf
@@ -254,6 +255,7 @@ class LoadingListAPI(APIView):
         id = serializers.CharField()
         trailer_details = VehicleSerializer(source="trailer", read_only=True)
         truck_details = VehicleSerializer(source="truck", read_only=True)
+        
 
     def get(self, request):
         serializer = self.OutputSerializer(order_list('LOADING'), many=True)
@@ -272,19 +274,25 @@ class LoadingCreateAPI(APIView):
         order = self.request.data['order']
         net_weight = self.request.data['net_weight']
         tare_weight = self.request.data['tare_weight']
-        gross_weight = self.request.data['gross_weight']    
+        gross_weight = self.request.data['gross_weight']
+        # Get the Order object based on the order_id, and retrieve the related Customer object in a single query
+        order_obj = Order.objects.select_related('customer').get(pk=order)
+
+        # Get the odoo_customer_id from the related Customer object
+        odoo_customer_id = order_obj.customer.odoo_customer_id  
+        print(odoo_customer_id)  
         serializer = self.InputSerializer(data={'order_id':order, 'net_weight':net_weight, 'tare_weight':tare_weight, 'gross_weight':gross_weight})
         serializer.is_valid(raise_exception=True)
         loading_create(**serializer.validated_data)
-        odoo_api = LibraryAPI( host='172.23.0.3', 
-                                port=8069, 
+        odoo_api = LibraryAPI( host='172.28.0.2', 
+                                port=6969, 
                                 db='devel', 
                                 user='admin', 
                                 pwd='admin')
 
         print("we here")
         odoo_api._execute('create_sales_order', 'sale.order', [{
-            'partner_id': 1677, # Replace with the customer's ID
+            'partner_id': odoo_customer_id, # Replace with the customer's ID
             'so_name': order,
             'order_line': [(0, 0, {
                 'product_id': 	2, # Replace with the product's ID

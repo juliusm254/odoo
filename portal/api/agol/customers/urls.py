@@ -15,6 +15,10 @@ from customers.views import (OrderViewSet,
                     CustomerTruckViewSet,
                     BulkOrderViewSet)
 
+from customers.api import (
+                    CustomerListAPI
+                    )
+
 router = DefaultRouter()
 
 router.register('order', OrderViewSet, basename='customer order')
@@ -31,6 +35,7 @@ urlpatterns = [
     # path('', include(router.urls)),
     path("login/", LoginView.as_view(), name="login"),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('customer-list/',CustomerListAPI.as_view(), name="customer_list"),
     
     # path("order/", views.get_orders, name="get_orders"),
     # path('customer-trailer/', views.CustomerTrailerListView.as_view(), name='customer-trailer')

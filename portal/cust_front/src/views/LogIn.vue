@@ -51,7 +51,7 @@ export default {
     return {
       username: "",
       password: "",
-      type: "CUSTOMERS",
+      type: "CUSTOMER",
       incorrectAuth: false,
     };
   },

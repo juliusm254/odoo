@@ -40,7 +40,7 @@ export default {
       await axios.post(`/checklistcreate/`, payload).then((response) => {
         console.log(response.data);
       });
-      this.router.push({
+      router.push({
         name: 'SafetyInspection',
         // query: {
         //   ...route.query,

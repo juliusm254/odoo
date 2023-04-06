@@ -18,7 +18,7 @@ services:
     networks:
       default:
     labels:
-      doodba.domain.main: ""
+      doodba.domain.main: "http://172.22.7.61/"
 
   db:
     extends:

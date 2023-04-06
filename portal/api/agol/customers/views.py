@@ -141,10 +141,11 @@ class OrderViewSet(viewsets.ModelViewSet):
         # driver = Driver.objects.get(id=1)
         # cust_obj = Customer.objects.get(id=1)
         print(cust_obj)
-        destination = self.request.data['destination'],
+        destination = self.request.data['destination']
         order_quantity = int(self.request.data['order_quantity'])
         balance_obj = BulkOrderBalance.objects.get(customer_id=cust_obj.id)
         print(balance_obj.quantity)
+        print(destination)
 
         if not cust_obj.bulk_customer:
         

@@ -164,10 +164,23 @@ services:
       TARGET: www.gravatar.com
       PRE_RESOLVE: 1
 
+  proxy_oil_and_gas:
+    image: ghcr.io/tecnativa/docker-whitelist:latest
+    networks:
+      default:
+        aliases:
+          - oil_and_gas
+      portal_oilandgas_network:
+    environment:
+      PORT: "6969 6899"
+      TARGET: odoo
+
 networks:
   default:
     internal: ${DOODBA_NETWORK_INTERNAL-true}
   public:
+  portal_oilandgas_network: 
+    external: true
 
 volumes:
   filestore:

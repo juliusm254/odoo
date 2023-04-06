@@ -3,6 +3,7 @@ version: '3'
 volumes:
   agol_local_postgres_data: {}
   agol_local_postgres_data_backups: {}
+  agol_local_pgadmin_data: {}
 
 services:
   agolapi:
@@ -21,7 +22,10 @@ services:
       - ./api/.envs/.local/.postgres
     ports:
       - "8000:8000"
-    command: /start-local
+    # command: /start-local
+    networks:
+      oilandgas_network:
+        ipv4_address: 172.28.1.2
 
   postgres:
     build:
@@ -34,6 +38,10 @@ services:
       - agol_local_postgres_data_backups:/backups:z
     env_file:
       - ./api/.envs/.local/.postgres
+
+    networks:
+      oilandgas_network:
+        ipv4_address: 172.28.1.5
 
   # # docs:
   # #   image: agol_local_docs
@@ -52,29 +60,29 @@ services:
   # #     - "9000:9000"
   # #   command: /start-docs
 
-  ops_front:
-    container_name: ops_front_local
-    restart: always
-    build:  
-      context: ./ops_front
-      dockerfile: Dockerfile-local
-    image: ops_front_image
-    # depends_on:
-    #   - agolapi
-    # volumes:
-    #   - ./ops_front/nginx:/etc/nginx/conf.d
-    ports:
-      - 81:80
+  # ops_front:
+    # container_name: ops_front_local
+    # restart: always
+    # build:  
+    #   context: ./ops_front
+    #   dockerfile: Dockerfile-local
+    # image: ops_front_image
+    # # depends_on:
+    # #   - agolapi
+    # # volumes:
+    # #   - ./ops_front/nginx:/etc/nginx/conf.d
+    # ports:
+    #   - 81:80
 
-  cust_front:
-    container_name: cust_front_local
-    restart: always
-    build:  
-      context: ./cust_front
-      dockerfile: Dockerfile-local
-    image: cust_front_image
-    ports:
-      - "82:80"
+  # cust_front:
+    # container_name: cust_front_local
+    # restart: always
+    # build:  
+    #   context: ./cust_front
+    #   dockerfile: Dockerfile-local
+    # image: cust_front_image
+    # ports:
+    #   - "82:80"
 
   # ops_front:
   #   container_name: ops_front_local_v2
@@ -93,3 +101,17 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=password
     ports: 
       - "5050:80"
+    volumes:
+      - agol_local_pgadmin_data:/var/lib/pgadmin
+    networks:
+      oilandgas_network:
+        ipv4_address: 172.28.1.6
+
+networks:
+  oilandgas_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+          gateway: 172.28.0.1
+    
