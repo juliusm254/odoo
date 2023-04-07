@@ -1,0 +1,299 @@
+{
+  "settings": {
+    "python.autoComplete.extraPaths": [
+      "/root/odoo/odoo/custom/src/odoo"
+    ],
+    "python.formatting.provider": "none",
+    "python.linting.flake8Enabled": true,
+    "python.linting.ignorePatterns": [
+      "/root/odoo/odoo/custom/src/odoo/**/*.py"
+    ],
+    "python.linting.pylintArgs": [
+      "--init-hook=\"import sys;sys.path.append('/root/odoo/odoo/custom/src/odoo')\"",
+      "--load-plugins=pylint_odoo"
+    ],
+    "python.linting.pylintEnabled": true,
+    "python.defaultInterpreterPath": "python3",
+    "restructuredtext.confPath": "",
+    "search.followSymlinks": false,
+    "search.useIgnoreFiles": false,
+    "[python]": {
+      "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[yaml]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[xml]": {
+      "editor.formatOnSave": false
+    }
+  },
+  "launch": {
+    "compounds": [
+      {
+        "name": "Start Odoo and debug Python",
+        "configurations": [
+          "Attach Python debugger to running container"
+        ],
+        "preLaunchTask": "Start Odoo in debug mode"
+      },
+      {
+        "name": "Test and debug current module",
+        "configurations": [
+          "Attach Python debugger to running container"
+        ],
+        "preLaunchTask": "Run Odoo Tests in debug mode for current module",
+        "internalConsoleOptions": "openOnSessionStart"
+      }
+    ],
+    "configurations": [
+      {
+        "name": "Attach Python debugger to running container",
+        "type": "python",
+        "request": "attach",
+        "pathMappings": [
+          {
+            "localRoot": "${workspaceFolder:odoo}/",
+            "remoteRoot": "/opt/odoo/custom/src/odoo"
+          }
+        ],
+        "port": 15899,
+        "host": "0.0.0.0"
+      },
+      {
+        "type": "firefox",
+        "request": "launch",
+        "reAttach": true,
+        "name": "Connect to firefox debugger",
+        "url": "http://localhost:15069/?debug=assets",
+        "reloadOnChange": {
+          "watch": "${workspaceFolder:doodba.odoo}/odoo/custom/src/**/*.{js,css,scss,less}"
+        },
+        "skipFiles": [
+          "**/lib/**"
+        ],
+        "pathMappings": []
+      },
+      {
+        "type": "chrome",
+        "request": "launch",
+        "name": "Connect to chrome debugger",
+        "url": "http://localhost:15069/?debug=assets",
+        "skipFiles": [
+          "**/lib/**"
+        ],
+        "trace": true,
+        "pathMapping": {}
+      }
+    ]
+  },
+  "folders": [
+    {
+      "path": "odoo/custom/src/private"
+    },
+    {
+      "path": ".",
+      "name": "doodba.odoo"
+    }
+  ],
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Start Odoo",
+        "type": "process",
+        "command": "invoke",
+        "args": [
+          "start",
+          "--detach"
+        ],
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": [],
+        "options": {
+          "statusbar": {
+            "label": "$(play-circle) Start Odoo"
+          }
+        }
+      },
+      {
+        "label": "Install current module",
+        "type": "process",
+        "command": "invoke",
+        "args": [
+          "install",
+          "--cur-file",
+          "${file}",
+          "restart"
+        ],
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": true,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": [],
+        "options": {
+          "statusbar": {
+            "label": "$(symbol-property) Install module"
+          }
+        }
+      },
+      {
+        "label": "Run Odoo Tests for current module",
+        "type": "process",
+        "command": "invoke",
+        "args": [
+          "test",
+          "--cur-file",
+          "${file}"
+        ],
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": true,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": [],
+        "options": {
+          "statusbar": {
+            "label": "$(beaker) Test module"
+          }
+        }
+      },
+      {
+        "label": "Run Odoo Tests in debug mode for current module",
+        "type": "process",
+        "command": "invoke",
+        "args": [
+          "test",
+          "--cur-file",
+          "${file}",
+          "--debugpy"
+        ],
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": [],
+        "options": {
+          "statusbar": {
+            "hide": true
+          }
+        }
+      },
+      {
+        "label": "Start Odoo in debug mode",
+        "type": "process",
+        "command": "invoke",
+        "args": [
+          "start",
+          "--detach",
+          "--debugpy"
+        ],
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": [],
+        "options": {
+          "statusbar": {
+            "hide": true
+          }
+        }
+      },
+      {
+        "label": "Stop Odoo",
+        "type": "process",
+        "command": "invoke",
+        "args": [
+          "stop"
+        ],
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": [],
+        "options": {
+          "statusbar": {
+            "label": "$(stop-circle) Stop Odoo"
+          }
+        }
+      },
+      {
+        "label": "Restart Odoo",
+        "type": "process",
+        "command": "invoke",
+        "args": [
+          "restart"
+        ],
+        "presentation": {
+          "echo": true,
+          "reveal": "silent",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": [],
+        "options": {
+          "statusbar": {
+            "label": "$(history) Restart Odoo"
+          }
+        }
+      },
+      {
+        "label": "See container logs",
+        "type": "process",
+        "command": "invoke",
+        "args": [
+          "logs"
+        ],
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "shared",
+          "showReuseMessage": true,
+          "clear": false
+        },
+        "problemMatcher": [],
+        "options": {
+          "statusbar": {
+            "label": "$(list-selection) See container logs"
+          }
+        }
+      }
+    ]
+  }
+}
