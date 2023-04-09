@@ -1,0 +1,109 @@
+version: "2.4"
+
+services:
+  odoo:
+    extends:
+      file: common.yaml
+      service: odoo
+    restart: unless-stopped
+    env_file:
+      - .docker/odoo.env
+      - .docker/db-access.env
+    environment:
+      DB_FILTER: ".*"
+      DOODBA_ENVIRONMENT: "${DOODBA_ENVIRONMENT-prod}"
+      INITIAL_LANG: "en_US"
+      SMTP_SERVER: smtplocal
+    depends_on:
+      - db
+      - smtp
+    networks:
+      default:
+      inverseproxy_shared:
+    labels:
+      doodba.domain.main: "gechcode.com"
+      traefik.enable: "true"
+      traefik.domain: "gechcode.com"
+      traefik.main-0.frontend.rule: Host:gechcode.com
+      traefik.longpolling-0.frontend.rule: Host:gechcode.com;Path:/longpolling/{anything:.*}
+      traefik.longpolling-0.port: 8072
+      traefik.http.middlewares.oilandgas-15-0-prod-buffering.buffering.retryExpression:
+        IsNetworkError() && Attempts() < 5
+      traefik.http.middlewares.oilandgas-15-0-prod-compress.compress: "true"
+      ? traefik.http.middlewares.oilandgas-15-0-prod-forbid-crawlers.headers.customResponseHeaders.X-Robots-Tag
+      : "noindex, nofollow"
+      traefik.http.middlewares.oilandgas-15-0-prod-addSTS.headers.forceSTSHeader: "true"
+      traefik.http.middlewares.oilandgas-15-0-prod-forceSecure.redirectScheme.scheme: https
+      traefik.http.middlewares.oilandgas-15-0-prod-forceSecure.redirectScheme.permanent: "true"
+      traefik.http.services.oilandgas-15-0-prod-main.loadbalancer.server.port: 8069
+      traefik.http.services.oilandgas-15-0-prod-longpolling.loadbalancer.server.port: 8072
+      traefik.http.routers.oilandgas-15-0-prod-main-0.rule: Host(`gechcode.com`)
+      traefik.http.routers.oilandgas-15-0-prod-main-0.service: oilandgas-15-0-prod-main
+      traefik.http.routers.oilandgas-15-0-prod-main-0.middlewares:
+        oilandgas-15-0-prod-addSTS, oilandgas-15-0-prod-buffering,
+        oilandgas-15-0-prod-compress, oilandgas-15-0-prod-forceSecure
+      traefik.http.routers.oilandgas-15-0-prod-main-secure-0.rule: Host(`gechcode.com`)
+      traefik.http.routers.oilandgas-15-0-prod-main-secure-0.service: oilandgas-15-0-prod-main
+      traefik.http.routers.oilandgas-15-0-prod-main-secure-0.middlewares:
+        oilandgas-15-0-prod-addSTS, oilandgas-15-0-prod-buffering,
+        oilandgas-15-0-prod-compress, oilandgas-15-0-prod-forceSecure
+      traefik.http.routers.oilandgas-15-0-prod-main-secure-0.tls: "true"
+      traefik.http.routers.oilandgas-15-0-prod-main-secure-0.tls.certResolver: letsencrypt
+      traefik.http.routers.oilandgas-15-0-prod-longpolling-0.rule:
+        Host(`gechcode.com`) && PathPrefix(`/longpolling/`)
+      traefik.http.routers.oilandgas-15-0-prod-longpolling-0.service: oilandgas-15-0-prod-longpolling
+      traefik.http.routers.oilandgas-15-0-prod-longpolling-0.middlewares:
+        oilandgas-15-0-prod-addSTS, oilandgas-15-0-prod-forceSecure
+      traefik.http.routers.oilandgas-15-0-prod-longpolling-secure-0.rule:
+        Host(`gechcode.com`) && PathPrefix(`/longpolling/`)
+      traefik.http.routers.oilandgas-15-0-prod-longpolling-secure-0.service: oilandgas-15-0-prod-longpolling
+      traefik.http.routers.oilandgas-15-0-prod-longpolling-secure-0.middlewares:
+        oilandgas-15-0-prod-addSTS, oilandgas-15-0-prod-forceSecure
+      traefik.http.routers.oilandgas-15-0-prod-longpolling-secure-0.tls: "true"
+      traefik.http.routers.oilandgas-15-0-prod-longpolling-secure-0.tls.certResolver: letsencrypt
+
+  db:
+    extends:
+      file: common.yaml
+      service: db
+    env_file:
+      - .docker/db-creation.env
+    restart: unless-stopped
+    networks:
+      default:
+      inverseproxy_shared:
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: "inverseproxy_shared"
+      traefik.tcp.services.oilandgas-15-0-prod-database.loadbalancer.server.port: 5432
+      traefik.oilandgas-15-0-prod-database-0.port: 5432
+      traefik.tcp.routers.oilandgas-15-0-prod-database-0.rule: Host(`gechcode.com`)
+      traefik.tcp.routers.oilandgas-15-0-prod-database-0.service: oilandgas-15-0-prod-database
+  smtp:
+    extends:
+      file: common.yaml
+      service: smtpreal
+    env_file:
+      - .docker/smtp.env
+    networks:
+      default:
+        aliases:
+          - smtplocal
+    restart: unless-stopped
+
+networks:
+  default:
+    driver_opts:
+      encrypted: 1
+
+  inverseproxy_shared:
+    external: true
+
+volumes:
+  filestore:
+  db:
+  mailconfig:
+  maildata:
+  maillogs:
+  maillogssupervisord:
+  mailstate:
