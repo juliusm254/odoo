@@ -23,37 +23,38 @@ services:
       globalwhitelist_shared:
       inverseproxy_shared:
     labels:
-      doodba.domain.main: "test.gechcode.com"
+      doodba.domain.main: "dev.gechcode.com"
       traefik.enable: "true"
-      traefik.domain: "test.gechcode.com"
+      traefik.domain: "dev.gechcode.com"
+      traefik.main-0.frontend.rule: Host:dev.gechcode.com
+      traefik.longpolling-0.frontend.rule: Host:dev.gechcode.com;Path:/longpolling/{anything:.*}
+      traefik.longpolling-0.port: 8072
       traefik.forbiddenCrawlers-0.frontend.headers.customResponseHeaders:
         "X-Robots-Tag:noindex, nofollow"
-      traefik.forbiddenCrawlers-0.frontend.rule: Host:test.gechcode.com;Path:/{anything:.*}
-      traefik.longpolling-0.frontend.rule: Host:test.gechcode.com;Path:/longpolling/{anything:.*}
-      traefik.longpolling-0.port: 8072
+      traefik.forbiddenCrawlers-0.frontend.rule: Host:dev.gechcode.com;Path:/{anything:.*}
       traefik.http.services.oilandgas-15-0-test-main.loadbalancer.server.port: 8069
       traefik.http.services.oilandgas-15-0-test-longpolling.loadbalancer.server.port: 8072
       traefik.http.routers.oilandgas-15-0-test-longpolling-0.rule:
-        Host(`test.gechcode.com`) && PathPrefix(`/longpolling/`)
+        Host(`dev.gechcode.com`) && PathPrefix(`/longpolling/`)
       traefik.http.routers.oilandgas-15-0-test-longpolling-0.service: oilandgas-15-0-test-longpolling
       traefik.http.routers.oilandgas-15-0-test-longpolling-0.middlewares:
         oilandgas-15-0-test-addSTS, oilandgas-15-0-test-forceSecure
       traefik.http.routers.oilandgas-15-0-test-longpolling-secure-0.rule:
-        Host(`test.gechcode.com`) && PathPrefix(`/longpolling/`)
+        Host(`dev.gechcode.com`) && PathPrefix(`/longpolling/`)
       traefik.http.routers.oilandgas-15-0-test-longpolling-secure-0.service: oilandgas-15-0-test-longpolling
       traefik.http.routers.oilandgas-15-0-test-longpolling-secure-0.middlewares:
         oilandgas-15-0-test-addSTS, oilandgas-15-0-test-forceSecure
       traefik.http.routers.oilandgas-15-0-test-longpolling-secure-0.tls: "true"
       traefik.http.routers.oilandgas-15-0-test-longpolling-secure-0.tls.certResolver: letsencrypt
       traefik.http.routers.oilandgas-15-0-test-forbiddenCrawlers-0.rule:
-        Host(`test.gechcode.com`) && (PathPrefix(`/`))
+        Host(`dev.gechcode.com`) && (PathPrefix(`/`))
       traefik.http.routers.oilandgas-15-0-test-forbiddenCrawlers-0.service: oilandgas-15-0-test-main
       traefik.http.routers.oilandgas-15-0-test-forbiddenCrawlers-0.middlewares:
         oilandgas-15-0-test-addSTS, oilandgas-15-0-test-buffering,
         oilandgas-15-0-test-compress, oilandgas-15-0-test-forbid-crawlers,
         oilandgas-15-0-test-forceSecure
       traefik.http.routers.oilandgas-15-0-test-forbiddenCrawlers-secure-0.rule:
-        Host(`test.gechcode.com`) && (PathPrefix(`/`))
+        Host(`dev.gechcode.com`) && (PathPrefix(`/`))
       traefik.http.routers.oilandgas-15-0-test-forbiddenCrawlers-secure-0.service: oilandgas-15-0-test-main
       traefik.http.routers.oilandgas-15-0-test-forbiddenCrawlers-secure-0.middlewares:
         oilandgas-15-0-test-addSTS, oilandgas-15-0-test-buffering,
@@ -85,11 +86,16 @@ services:
           - smtplocal
       inverseproxy_shared:
     labels:
-      doodba.domain.main: "test.gechcode.com"
-      traefik.docker.network: "inverseproxy_shared"
+      doodba.domain.main: "dev.gechcode.com"
+      # traefik.docker.network: "inverseproxy_shared"
       traefik.enable: "true"
+      traefik.domain: "dev.gechcode.com"
+      traefik.main-0.frontend.rule: Host:dev.gechcode.com
+      traefik.longpolling-0.frontend.rule: Host:dev.gechcode.com;Path:/longpolling/{anything:.*}
+      traefik.longpolling-0.port: 8072
+
       traefik.frontend.passHostHeader: "true"
-      traefik.mailhog-0.frontend.rule: Host:test.gechcode.com;PathPrefixStrip:/smtpfake/
+      traefik.mailhog-0.frontend.rule: Host:dev.gechcode.com;PathPrefixStrip:/smtpfake/
       traefik.mailhog-0.port: 8025
       # Mailhog service
       traefik.http.middlewares.oilandgas-15-0-test-mailhog-stripprefix.stripPrefix.prefixes: /smtpfake/
@@ -103,14 +109,14 @@ services:
       traefik.http.middlewares.oilandgas-15-0-test-forceSecure.redirectScheme.scheme: https
       traefik.http.middlewares.oilandgas-15-0-test-forceSecure.redirectScheme.permanent: "true"
       traefik.http.routers.oilandgas-15-0-test-mailhog-0.rule:
-        Host(`test.gechcode.com`) && PathPrefix(`/smtpfake/`)
+        Host(`dev.gechcode.com`) && PathPrefix(`/smtpfake/`)
       traefik.http.routers.oilandgas-15-0-test-mailhog-0.service: oilandgas-15-0-test-mailhog
       traefik.http.routers.oilandgas-15-0-test-mailhog-0.middlewares:
         oilandgas-15-0-test-addSTS, oilandgas-15-0-test-buffering,
         oilandgas-15-0-test-compress, oilandgas-15-0-test-forbid-crawlers,
         oilandgas-15-0-test-forceSecure, oilandgas-15-0-test-mailhog-stripprefix
       traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.rule:
-        Host(`test.gechcode.com`) && PathPrefix(`/smtpfake/`)
+        Host(`dev.gechcode.com`) && PathPrefix(`/smtpfake/`)
       traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.service: oilandgas-15-0-test-mailhog
       traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.middlewares:
         oilandgas-15-0-test-addSTS, oilandgas-15-0-test-buffering,
@@ -126,7 +132,7 @@ services:
 
 networks:
   default:
-    internal: ${DOODBA_NETWORK_INTERNAL-true}
+    # internal: ${DOODBA_NETWORK_INTERNAL-true}
     driver_opts:
       encrypted: 1
 
