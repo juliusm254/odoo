@@ -23,8 +23,11 @@ services:
       globalwhitelist_shared:
     labels:
 <<<<<<< HEAD
+<<<<<<< HEAD
       doodba.domain.main: ""
 =======
+=======
+>>>>>>> Staging first commit
       doodba.domain.main: "dev.gechcode.com"
       traefik.enable: "true"
       traefik.domain: "dev.gechcode.com"
@@ -89,8 +92,11 @@ services:
           - smtplocal
     labels:
 <<<<<<< HEAD
+<<<<<<< HEAD
       doodba.domain.main: ""
 =======
+=======
+>>>>>>> Staging first commit
       doodba.domain.main: "dev.gechcode.com"
       # traefik.docker.network: "inverseproxy_shared"
       traefik.enable: "true"
