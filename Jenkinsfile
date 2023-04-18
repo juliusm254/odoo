@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                sh 'docker-compose -f test.yaml up --build'
             }
         }
         stage('Test') {
