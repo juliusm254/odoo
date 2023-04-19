@@ -1,24 +1,35 @@
 pipeline {
   agent any
   stages {
+//     stage('Build') {
+//       parallel {
+//         stage('Build') {
+//           steps {
+//             sh 'docker-compose -f ./globalwhitelist/docker-compose.yaml up -d --build'
+//             sh 'docker-compose -f test.yaml up -d --build'
+//           }
+//         }
+
+//         stage('Tagging') {
+//           steps {
+//             sh 'docker tag odoo_staging_odoo gechcode/odoo_15_staging:"$BUILD_NUMBER"'
+//           }
+//         }
+
+//       }
+//     }
     stage('Build') {
-      parallel {
-        stage('Build') {
           steps {
             sh 'docker-compose -f ./globalwhitelist/docker-compose.yaml up -d --build'
             sh 'docker-compose -f test.yaml up -d --build'
-          }
         }
-
-        stage('Tagging') {
+    }
+    stage('Tagging') {
           steps {
             sh 'docker tag odoo_staging_odoo gechcode/odoo_15_staging:"$BUILD_NUMBER"'
           }
         }
-
-      }
-    }
-
+        
     stage('Test') {
       steps {
         echo 'Testing..'
