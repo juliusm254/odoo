@@ -35,6 +35,12 @@ pipeline {
       }
     }
 
+    stage('Push to Dockerhub') {
+      steps {
+        sh 'docker push gechcode/odoo_15_staging:"$BUILD_NUMBER"'
+      }
+    }
+
   }
   environment {
     registry = 'gechcode/odoo_15'
