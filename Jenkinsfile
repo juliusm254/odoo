@@ -2,9 +2,20 @@ pipeline {
   agent any
   stages {
     stage('Build') {
-      steps {
-        sh 'docker-compose -f ./globalwhitelist/docker-compose.yaml up -d --build'
-        sh 'docker-compose -f test.yaml up -d --build'
+      parallel {
+        stage('Build') {
+          steps {
+            sh 'docker-compose -f ./globalwhitelist/docker-compose.yaml up -d --build'
+            sh 'docker-compose -f test.yaml up -d --build'
+          }
+        }
+
+        stage('Tagging') {
+          steps {
+            sh 'odoo_image = docker tag odoo_staging_odoo gechcode/odoo_15_staging + ":$BUILD_NUMBER"'
+          }
+        }
+
       }
     }
 
