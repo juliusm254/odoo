@@ -25,9 +25,13 @@ pipeline {
       }
     }
 
-    stage('Deploy') {
+    stage('Login Dockerhub') {
+      environment {
+        DOCKERHUB_USER = 'gechcode'
+        DOCKERHUB_PWD = 'Gechcodemax1'
+      }
       steps {
-        echo 'Deploying....'
+        sh 'docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PWD'
       }
     }
 
