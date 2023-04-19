@@ -1,5 +1,14 @@
 pipeline {
     agent any
+    options{
+        buildDiscarder(logRotator(numToKeepStr: '5', daysToKeepStr: '5'))
+        timestamps()
+    }
+    environment{
+
+        registry = "gechcode/odoo_15"
+        registryCredential = '7249de4f-7415-4d48-9e68-6f77218f9e51'
+    }
 
     stages {
         stage('Build') {
