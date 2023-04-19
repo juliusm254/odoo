@@ -12,7 +12,7 @@ pipeline {
 
         stage('Tagging') {
           steps {
-            sh 'docker tag odoo_staging_odoo gechcode/odoo_15_staging + ":$BUILD_NUMBER"'
+            sh 'docker tag odoo_staging_odoo gechcode/odoo_15_staging:"$BUILD_NUMBER"'
           }
         }
 
