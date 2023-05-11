@@ -27,6 +27,7 @@ def create_pdf( order_no,
                 trailer_epra,
                 trailer_trans,
                 q1,
+<<<<<<< Updated upstream
                 q2,
                 q3,
                 q4,
@@ -34,6 +35,15 @@ def create_pdf( order_no,
                 c2,
                 c3,
                 c4,                
+=======
+                # q2,
+                # q3,
+                # q4,
+                c1,
+                # c2,
+                # c3,
+                # c4,                
+>>>>>>> Stashed changes
                 warehouse,
                 date,
                 time,
@@ -135,6 +145,7 @@ def create_pdf( order_no,
 
     table_data = [['DRIVER DETAILS','Y/N'],
                 [q1, c1],
+<<<<<<< Updated upstream
                 [q2, c2],
                 [q3, c3],
                 [q4, c4],
@@ -150,6 +161,24 @@ def create_pdf( order_no,
                 [q2, c2],
                 [q3, c3],
                 [q4, c4],]
+=======
+                # [q2, c2],
+                # [q3, c3],
+                # [q4, c4],
+                # [q1, c1],
+                # [q2, c2],
+                # [q3, c3],
+                # [q4, c4],
+                # [q1, c1],
+                # [q2, c2],
+                # [q3, c3],
+                # [q4, c4],
+                # [q1, c1],
+                # [q2, c2],
+                # [q3, c3],
+                # [q4, c4],
+                ]
+>>>>>>> Stashed changes
     t = Table(table_data, colWidths=[208, 20], rowHeights=15)
     style = [           
             ('BOX', (0,0), (-1,-1), 0.25, colors.black),

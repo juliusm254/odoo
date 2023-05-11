@@ -78,8 +78,13 @@ class ChecklistDetailAPI(APIView):
     def get(self, request, pk=None):
         serializer = self.OutputSerializer(checklist_details(pk), many=True)
         # print(serializer.data)
+<<<<<<< Updated upstream
         print(serializer.data[0]["checklist_choice"])
         print(serializer.data[1]["checklist_choice"])
+=======
+        # print(serializer.data[0]["checklist_choice"])
+        # print(serializer.data[1]["checklist_choice"])
+>>>>>>> Stashed changes
         # contract = Contract.query.get(id)
         # contractor = SafetyChecklist.objects.get(contract.contractor_id)
         # booking = Booking.query.filter_by(contract_id=contract.id).first()
@@ -96,6 +101,7 @@ class ChecklistDetailAPI(APIView):
                             # Questions
 
                             q1=serializer.data[0]["question_desc"]['question_desc'],
+<<<<<<< Updated upstream
                             q2=serializer.data[1]["question_desc"]['question_desc'],
                             q3=serializer.data[2]["question_desc"]['question_desc'],
                             q4=serializer.data[3]["question_desc"]['question_desc'],
@@ -103,6 +109,15 @@ class ChecklistDetailAPI(APIView):
                             c2=serializer.data[1]["checklist_choice"],
                             c3=serializer.data[2]["checklist_choice"],
                             c4=serializer.data[3]["checklist_choice"],
+=======
+                            # q2=serializer.data[1]["question_desc"]['question_desc'],
+                            # q3=serializer.data[2]["question_desc"]['question_desc'],
+                            # q4=serializer.data[3]["question_desc"]['question_desc'],
+                            c1=serializer.data[0]["checklist_choice"],
+                            # c2=serializer.data[1]["checklist_choice"],
+                            # c3=serializer.data[2]["checklist_choice"],
+                            # c4=serializer.data[3]["checklist_choice"],
+>>>>>>> Stashed changes
 
 
                             warehouse="contract.warehouse",
@@ -250,7 +265,11 @@ class LabVentListAPI(APIView):
         return Response(serializer.data)
 
 class LoadingListAPI(APIView):
+<<<<<<< Updated upstream
     permission_classes = [IsAuthenticated,]
+=======
+    # permission_classes = [IsAuthenticated,]
+>>>>>>> Stashed changes
     class OutputSerializer(serializers.Serializer):
         id = serializers.CharField()
         trailer_details = VehicleSerializer(source="trailer", read_only=True)
@@ -284,8 +303,13 @@ class LoadingCreateAPI(APIView):
         serializer = self.InputSerializer(data={'order_id':order, 'net_weight':net_weight, 'tare_weight':tare_weight, 'gross_weight':gross_weight})
         serializer.is_valid(raise_exception=True)
         loading_create(**serializer.validated_data)
+<<<<<<< Updated upstream
         odoo_api = LibraryAPI( host='172.28.0.2', 
                                 port=6969, 
+=======
+        odoo_api = LibraryAPI( host='odoo_proxy',                              
+                                port=8069, 
+>>>>>>> Stashed changes
                                 db='devel', 
                                 user='admin', 
                                 pwd='admin')
@@ -293,6 +317,7 @@ class LoadingCreateAPI(APIView):
         print("we here")
         odoo_api._execute('create_sales_order', 'sale.order', [{
             'partner_id': odoo_customer_id, # Replace with the customer's ID
+<<<<<<< Updated upstream
             'so_name': order,
             'order_line': [(0, 0, {
                 'product_id': 	2, # Replace with the product's ID
@@ -302,6 +327,19 @@ class LoadingCreateAPI(APIView):
                 'customer_lead': 0,
                 'order_id': order
             })],
+=======
+            'so_name':'Portal - ' + order,
+            'price_unit': 10.0,
+            'product_uom_qty': net_weight,
+            # 'order_line': [(0, 0, {
+            #     'product_id': 	2, # Replace with the product's ID
+            #     'product_uom_qty': 1,
+            #     'price_unit': 10.0, # Replace with the product's unit price                
+            #     'name': "Order Line Name",
+            #     'customer_lead': 0,
+            #     'order_id': order
+            # })],
+>>>>>>> Stashed changes
         }])
         return Response(status=status.HTTP_201_CREATED)
 

@@ -8,6 +8,7 @@ services:
     networks: &public
       default:
       public:
+      inverseproxy_shared:
     ports:
       - "127.0.0.1:15899:6899"
       - "127.0.0.1:15069:8069"
@@ -62,6 +63,9 @@ services:
       - --limit-time-real=9999999
       - --workers=0
       - --dev=reload,qweb,werkzeug,xml
+    networks:
+      default:
+      inverseproxy_shared:
 
   db:
     extends:
@@ -164,6 +168,11 @@ services:
       TARGET: www.gravatar.com
       PRE_RESOLVE: 1
 
+<<<<<<< Updated upstream:odoo15/devel.yaml
+=======
+<<<<<<< Updated upstream:devel.yaml
+=======
+>>>>>>> Stashed changes:devel.yaml
   proxy_oil_and_gas:
     image: ghcr.io/tecnativa/docker-whitelist:latest
     networks:
@@ -171,16 +180,34 @@ services:
         aliases:
           - oil_and_gas
       portal_oilandgas_network:
+<<<<<<< Updated upstream:odoo15/devel.yaml
+=======
+        ipv4_address: 172.28.1.8
+>>>>>>> Stashed changes:devel.yaml
     environment:
       PORT: "6969 6899"
       TARGET: odoo
 
+<<<<<<< Updated upstream:odoo15/devel.yaml
+=======
+>>>>>>> Stashed changes:odoo15/devel.yaml
+>>>>>>> Stashed changes:devel.yaml
 networks:
   default:
     internal: ${DOODBA_NETWORK_INTERNAL-true}
   public:
+<<<<<<< Updated upstream:odoo15/devel.yaml
   portal_oilandgas_network: 
     external: true
+=======
+<<<<<<< Updated upstream:devel.yaml
+=======
+  inverseproxy_shared:
+    external: true
+  portal_oilandgas_network: 
+    external: true
+>>>>>>> Stashed changes:odoo15/devel.yaml
+>>>>>>> Stashed changes:devel.yaml
 
 volumes:
   filestore:

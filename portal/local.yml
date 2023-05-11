@@ -26,6 +26,12 @@ services:
     networks:
       oilandgas_network:
         ipv4_address: 172.28.1.2
+<<<<<<< Updated upstream
+=======
+      odoo15_public:
+      inverseproxy_shared:
+   
+>>>>>>> Stashed changes
 
   postgres:
     build:
@@ -106,6 +112,10 @@ services:
     networks:
       oilandgas_network:
         ipv4_address: 172.28.1.6
+<<<<<<< Updated upstream
+=======
+      
+>>>>>>> Stashed changes
 
 networks:
   oilandgas_network:
@@ -114,4 +124,11 @@ networks:
       config:
         - subnet: 172.28.0.0/16
           gateway: 172.28.0.1
+<<<<<<< Updated upstream
     
+=======
+  odoo15_public:
+    external: true
+  inverseproxy_shared:
+    external: true
+>>>>>>> Stashed changes

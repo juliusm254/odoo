@@ -93,8 +93,15 @@ INSTALLED_APPS += ["django_extensions"]  # noqa F405
 # ------------------------------------------------------------------------------
 INSTALLED_APPS += ["faker"]
 
+<<<<<<< Updated upstream
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(days=365),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=365),
     }
+=======
+# SIMPLE_JWT = {
+#     'ACCESS_TOKEN_LIFETIME': timedelta(days=365),
+#     'REFRESH_TOKEN_LIFETIME': timedelta(days=365),
+#     }
+>>>>>>> Stashed changes
 

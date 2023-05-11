@@ -24,7 +24,11 @@ class LibraryAPI():
     def _execute(self, method, model, args):
     # Create a new sales order
         if method == 'create_sales_order':
+<<<<<<< Updated upstream
             print(args[0])
+=======
+            # print(args[0]['order_line'])
+>>>>>>> Stashed changes
             # Extract the arguments for the create method
             partner_id = args[0].get('partner_id')
             warehouse_id = 1
@@ -35,8 +39,13 @@ class LibraryAPI():
             name = args[0].get('so_name')
             picking_policy = "direct"
             product_id = 2
+<<<<<<< Updated upstream
             product_qty = ''
             product_price = ''
+=======
+            product_qty = args[0].get('product_uom_qty')
+            product_price = args[0].get('price_unit')
+>>>>>>> Stashed changes
             # name = ''
             customer_lead = ''
             order_id = ''
@@ -45,7 +54,11 @@ class LibraryAPI():
                 'product_id': product_id,
                 'product_uom_qty': product_qty,
                 'price_unit': product_price,
+<<<<<<< Updated upstream
                 'name': name,
+=======
+                # 'name': name,
+>>>>>>> Stashed changes
                 'customer_lead': customer_lead,
                 'order_id': order_id
             })]

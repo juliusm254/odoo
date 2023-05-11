@@ -15,14 +15,23 @@ class Customer(models.Model):
     email = models.CharField(max_length=200, null=True)
     contact_person = models.CharField(max_length=255)
     email = models.EmailField()
+<<<<<<< Updated upstream
     location = models.CharField(max_length=255)
+=======
+    location = models.CharField(max_length=255, null=True)
+>>>>>>> Stashed changes
     odoo_customer_id = models.CharField(max_length=20, blank=True, null=True)
     # profile_picture = models.ImageField(null=True, blank=True, upload_to = 'profile_pictures/', default='../media/profile_pictures/default_pic.jpg')
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     bulk_customer = models.BooleanField(null=False, default=False)
 
+<<<<<<< Updated upstream
     # def __str__(self):
     #     return self.name
+=======
+    def __str__(self):
+        return self.name
+>>>>>>> Stashed changes
 
 
 class Vehicle(models.Model):

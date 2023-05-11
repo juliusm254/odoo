@@ -16,7 +16,12 @@ from customers.views import (OrderViewSet,
                     BulkOrderViewSet)
 
 from customers.api import (
+<<<<<<< Updated upstream
                     CustomerListAPI
+=======
+                    CustomerListAPI,
+                    CustomerCreateAPI
+>>>>>>> Stashed changes
                     )
 
 router = DefaultRouter()
@@ -36,6 +41,10 @@ urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('customer-list/',CustomerListAPI.as_view(), name="customer_list"),
+<<<<<<< Updated upstream
+=======
+    path('customer-create/',CustomerCreateAPI.as_view(), name="customer_create"),
+>>>>>>> Stashed changes
     
     # path("order/", views.get_orders, name="get_orders"),
     # path('customer-trailer/', views.CustomerTrailerListView.as_view(), name='customer-trailer')

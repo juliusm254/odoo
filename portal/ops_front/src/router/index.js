@@ -18,6 +18,10 @@ import PrintSafetyInspectionList from "../views/PrintSafetyInspectionList.vue";
 import PrintSafetyDetails from "../components/PrintSafetyDetails.vue";
 import LabSeal from "../views/LabSeal.vue";
 import LabSealDetails from "../components/LabSealDetails.vue";
+<<<<<<< Updated upstream
+=======
+import CustomerAdd from "../views/CustomerAdd.vue";
+>>>>>>> Stashed changes
 
 const routes = [
   {
@@ -107,7 +111,11 @@ const routes = [
     path: "/loading/:id",
     name: "LoadingDetails",
     component: LoadingDetails,
+<<<<<<< Updated upstream
     meta: { requiredAuth: true }
+=======
+    // meta: { requiredAuth: true }
+>>>>>>> Stashed changes
   },
   {
     path: "/print-safety",
@@ -122,6 +130,15 @@ const routes = [
     meta: { requiredAuth: true }
   },
   {
+<<<<<<< Updated upstream
+=======
+    path: "/add-customer",
+    name: "CustomerAdd",
+    component: CustomerAdd,
+    // meta: { requiredAuth: true }
+  },
+  {
+>>>>>>> Stashed changes
     path: "/about",
     name: "About",
     // route level code-splitting
