@@ -1,0 +1,112 @@
+# # General
+# # ------------------------------------------------------------------------------
+# USE_DOCKER=yes
+# IPYTHONDIR=/app/.ipython
+
+# # General
+# # ------------------------------------------------------------------------------
+# DJANGO_READ_DOT_ENV_FILE=True
+# DJANGO_SETTINGS_MODULE=config.settings.production
+# DJANGO_SECRET_KEY=BKeaV8N85OPpXnOaV89WX0n6Nf8JW5J9vdnrYf4qHWQ8nF7RarOnZ0sSaHvkfjdh
+# DJANGO_ADMIN_URL=admin/
+
+
+# # Security
+# # ------------------------------------------------------------------------------
+# # TIP: better off using DNS, however, redirect is OK too
+# DJANGO_SECURE_SSL_REDIRECT=False
+
+# # Email
+# # ------------------------------------------------------------------------------
+# DJANGO_SERVER_EMAIL=
+
+# MAILGUN_API_KEY=
+# MAILGUN_DOMAIN=
+
+
+# # AWS
+# # ------------------------------------------------------------------------------
+# DJANGO_AWS_ACCESS_KEY_ID=
+# DJANGO_AWS_SECRET_ACCESS_KEY=
+# DJANGO_AWS_STORAGE_BUCKET_NAME=
+
+# # django-allauth
+# # ------------------------------------------------------------------------------
+# DJANGO_ACCOUNT_ALLOW_REGISTRATION=True
+
+# # Gunicorn
+# # ------------------------------------------------------------------------------
+# WEB_CONCURRENCY=4
+
+
+# # Redis
+# # ------------------------------------------------------------------------------
+# REDIS_URL=redis://redis:6379/0
+
+
+# # PostgreSQL
+# # ------------------------------------------------------------------------------
+# # POSTGRES_ENG=django.db.backends.postgresql
+# # POSTGRES_HOST="containers-us-west-64.railway.app"
+# # POSTGRES_PORT=6132
+# # POSTGRES_DB=railway
+# # POSTGRES_USER=postgres
+# # POSTGRES_PASSWORD=fPLFpNeQwkiwBnZFiTOu
+# # POSTGRES_PASSWORD=dOdkeBNaVy3pTOM5i3YLTCcIaUVPk4odrAgltoTYj4WPN6C9ATtow5XSSyeyZ4fH
+
+# # POSTGRES_HOST=postgres
+# # POSTGRES_PORT=5432
+# # POSTGRES_DB=agol
+# # POSTGRES_USER=VECeHzmaGdaxvLIiRFkVcszLXYrMiTVA
+# # POSTGRES_PASSWORD=dOdkeBNaVy3pTOM5i3YLTCcIaUVPk4odrAgltoTYj4WPN6C9ATtow5XSSyeyZ4fH
+# # DATABASE_URL=postgres://VECeHzmaGdaxvLIiRFkVcszLXYrMiTVA:dOdkeBNaVy3pTOM5i3YLTCcIaUVPk4odrAgltoTYj4WPN6C9ATtow5XSSyeyZ4fH@postgres:5432/agol
+
+
+# # DATABASE_URL=postgresql://postgres:fPLFpNeQwkiwBnZFiTOu@containers-us-west-64.railway.app:6132/railway
+# # PGDATABASE=railway
+# # PGHOST=containers-us-west-90.railway.app
+# # PGPASSWORD=cSfnFPXMWLQC7B7wmtzI
+# # PGPORT=7395
+# # PGUSER=postgres
+
+
+
+
+
+# # POSTGRES_ENG=django.db.backends.postgresql
+# # POSTGRES_HOST="pg-agol-jc-ad7f.aivencloud.com"
+# # POSTGRES_PORT=20571
+# # POSTGRES_DB=defaultdb
+# # POSTGRES_USER=avnadmin
+# # POSTGRES_PASSWORD=AVNS_KJjO_FlgjocFKVl-Nu_
+# # POSTGRES_PASSWORD=dOdkeBNaVy3pTOM5i3YLTCcIaUVPk4odrAgltoTYj4WPN6C9ATtow5XSSyeyZ4fH
+
+# # DATABASE_URL=postgres://avnadmin:AVNS_KJjO_FlgjocFKVl-Nu_@pg-agol-jc-ad7f.aivencloud.com:20571/defaultdb?sslmode=require
+
+# # Service URI
+# # postgres://avnadmin:AVNS_KJjO_FlgjocFKVl-Nu_@pg-agol-jc-ad7f.aivencloud.com:20571/defaultdb?sslmode=require
+
+# # Database Name
+# # defaultdb
+
+# # Host
+# # pg-agol-jc-ad7f.aivencloud.com
+
+# # Port
+# # 20571
+
+# # User
+# # avnadmin
+
+# # Password
+# # AVNS_KJjO_FlgjocFKVl-Nu_
+
+
+# # SSLmode
+# # require
+
+# # CA Certificate
+# # Show
+
+# # Connection Limit
+# # 25

@@ -1,0 +1,26 @@
+version: '3'
+<<<<<<< Updated upstream
+=======
+
+networks:
+  portal_oilandgas_network:
+    external: true
+
+>>>>>>> Stashed changes
+services:
+  ops_front:
+    container_name: ops_front_local
+    # restart: always
+    build:  
+      context: .
+      dockerfile: Dockerfile-local
+    image: ops_front_image
+    ports:
+<<<<<<< Updated upstream
+      - "81:80"
+=======
+      - "81:80"
+    networks:
+      portal_oilandgas_network:
+        ipv4_address: 172.28.1.7
+>>>>>>> Stashed changes

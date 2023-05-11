@@ -1,0 +1,30 @@
+{
+  "name": "ops_front",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "serve": "vue-cli-service serve",
+    "build": "vite build",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "eslint-plugin-vue": "^8.7.1",
+    "lodash": "^4.17.21",
+    "core-js": "^3.6.5",
+    "pdfjs-dist": "^2.16.105",
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.5",
+    "vuex": "^4.0.2",
+    "@volar-plugins/vetur": "latest"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.0",
+    "autoprefixer": "^10.4.7",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.8",
+    "vite": "^3.0.9"
+  }
+}

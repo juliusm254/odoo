@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+
+
+>&2 echo 'PostgreSQL is available' &
+
+exec "$@"
+
+
+# nginx -c "$PWD/nginx.conf" &
+
+# Apply database migrations
+echo "Apply database migrations"
+
+# python manage.py makemigrations accounts
+
+# python manage.py migrate --run-syncdb
+# python manage.py migrate 
+
+
+# python /app/manage.py collectstatic --noinput &
+
+gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 0 config.wsgi --chdir=/app
+# /usr/local/bin/gunicorn config.wsgi --bind 0.0.0.0:8000 --chdir=/app
+wait -n

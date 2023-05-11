@@ -1,7 +1,13 @@
 # Ignore all src directories except private and files with a dot
+<<<<<<< HEAD
 /odoo/auto
 /odoo/custom/src/*/
 !/odoo/custom/src/private/
+=======
+/odoo15/odoo/auto
+/odoo15/odoo/custom/src/*/
+!/odoo15/odoo/custom/src/private/
+>>>>>>> A/main
 
 # Ignore docker-compose.yml and overrides by default, to allow easy defaults per clone
 /docker-compose.yml
@@ -15,16 +21,54 @@
 **.orig
 
 # User-specific or editor-specific development files and settings
+<<<<<<< HEAD
 .vscode/*
+=======
+>>>>>>> A/main
 !/.vscode/*.jinja
 !/.vscode/extensions.json
 !/.vscode/launch.json
 !/.vscode/settings.json
 !/.vscode/tasks.json
+<<<<<<< HEAD
 /odoo/custom/src/private/.vscode/*
 /.venv
 /doodba.*.code-workspace
+=======
+.vscode/*
+/odoo15/odoo/custom/src/private/.vscode/*
+/.venv
+/odoo15/doodba.*.code-workspace
+>>>>>>> A/main
 /src
 
 # Project-specific docker configurations
 /.docker/
+<<<<<<< HEAD
+=======
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+>>>>>>> A/main

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [![Doodba deployment](https://img.shields.io/badge/deployment-doodba-informational)](https://github.com/Tecnativa/doodba)
 [![Last template update](https://img.shields.io/badge/last%20template%20update-v5.1.3--4--gd8112b6-informational)](https://github.com/Tecnativa/doodba-copier-template/tree/v5.1.3-4-gd8112b6)
 [![Odoo](https://img.shields.io/badge/odoo-v15.0-a3478a)](https://github.com/odoo/odoo/tree/15.0)
@@ -17,3 +18,7 @@ This project is a Doodba scaffolding. Check upstream docs on the matter:
 # Credits
 
 This project is maintained by: gechcode
+=======
+# oil_and_gas
+Oil and Gas 
+>>>>>>> A/main
