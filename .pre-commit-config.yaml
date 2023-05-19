@@ -52,7 +52,7 @@ repos:
         args:
           - --keep-percent-format
   - repo: https://github.com/timothycrosley/isort
-    rev: 5.5.1
+    rev: 5.12.0
     hooks:
       - id: isort
         name: isort except __init__.py
