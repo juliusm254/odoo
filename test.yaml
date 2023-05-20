@@ -21,6 +21,7 @@ services:
     networks:
       default:
       globalwhitelist_shared:
+      inverseproxy_shared:
     labels:
       doodba.domain.main: "dev.gechcode.com"
       traefik.enable: "true"
