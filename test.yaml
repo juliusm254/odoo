@@ -85,6 +85,7 @@ services:
       default:
         aliases:
           - smtplocal
+      inverseproxy_shared:
     labels:
       doodba.domain.main: "dev.gechcode.com"
       # traefik.docker.network: "inverseproxy_shared"
