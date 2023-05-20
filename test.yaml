@@ -22,9 +22,6 @@ services:
       default:
       globalwhitelist_shared:
     labels:
-<<<<<<< HEAD
-      doodba.domain.main: ""
-=======
       doodba.domain.main: "dev.gechcode.com"
       traefik.enable: "true"
       traefik.domain: "dev.gechcode.com"
@@ -64,7 +61,7 @@ services:
         oilandgas-15-0-test-forceSecure
       traefik.http.routers.oilandgas-15-0-test-forbiddenCrawlers-secure-0.tls: "true"
       traefik.http.routers.oilandgas-15-0-test-forbiddenCrawlers-secure-0.tls.certResolver: letsencrypt
->>>>>>> Staging first commit
+
     command:
       - odoo
       - --workers=2
@@ -88,9 +85,6 @@ services:
         aliases:
           - smtplocal
     labels:
-<<<<<<< HEAD
-      doodba.domain.main: ""
-=======
       doodba.domain.main: "dev.gechcode.com"
       # traefik.docker.network: "inverseproxy_shared"
       traefik.enable: "true"
@@ -129,7 +123,7 @@ services:
         oilandgas-15-0-test-forceSecure, oilandgas-15-0-test-mailhog-stripprefix
       traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.tls: "true"
       traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.tls.certResolver: letsencrypt
->>>>>>> Staging first commit
+
     volumes:
       - "smtpconf:/etc/mailhog:ro,z"
     entrypoint: [sh, -c]
