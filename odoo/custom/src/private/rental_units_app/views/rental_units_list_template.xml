@@ -1,9 +1,9 @@
 <odoo>
 
-<template id="rental_units_list" name="Rental Units List">
+<template id="rental_units_list_template" name="Rental Units List">
     <div id="wrap" class="container">
         <h1>Rental Units</h1>
-        <t t-foreach="unit" t-as="unit">
+        <t t-foreach="units" t-as="unit">
             <div class="row">
                 <span t-field="unit.name" />,
                 <span t-field="unit.partner_id" />,

@@ -1,2 +1,3 @@
 from . import rental_unit
-from . import res_partner
+
+# from . import res_partner

@@ -1,0 +1,86 @@
+<odoo>
+ <!-- Add related field to display product names in rental unit form view -->
+        <record id="view_rental_unit_form" model="ir.ui.view">
+            <field name="name">Rental Unit Form</field>
+            <field name="model">rental.unit</field>
+            <field name="arch" type="xml">
+            <form string="Unit">
+                <header>
+                <!-- Buttons Go Here -->
+                    <!-- <button
+                        name="button_check_isbn"
+                        type="object"
+                        string="Check ISBN"
+                    /> -->
+                </header>
+                <sheet>
+                    <group name="group_top">
+                        <group name="group_left">
+                            <field name="name" />
+                            <!-- <field name="author_ids" widget="many2many_tags" /> -->
+                            <field name="price" />
+                            <!-- <field name="is_occupied" /> -->
+                        </group>
+                        <group name="group_right">
+                            <field name="partner_id" />
+                            <field name="is_occupied" />
+                            <!-- <field name="image" widget="image" /> -->
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page name="page_lines" string="Unit Services">
+                            <field name="product_ids">
+                            <tree>
+                                <field name="product_id" string="Product" />
+                                <field name="quantity" string="Quantity" />
+                            </tree>
+                            <!-- <form>
+                                <field name="product_id"
+                                string="Product"/>
+                                <field name="quantity"
+                                string="Quantity"/>
+
+                            </form> -->
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_tree_rental_units" model="ir.ui.view">
+        <field name="name">Rental Units List</field>
+        <field name="model">rental.unit</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <!-- <field name="author_ids" widget="many2many_tags" /> -->
+                <field name="partner_id" />
+                <field name="price" />
+                <!-- <field name="publisher_country_id" /> -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_search_rental_units" model="ir.ui.view">
+        <field name="name">Units Filters</field>
+        <field name="model">rental.unit</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <filter
+                    name="filter_occupied"
+                    string="Occupied"
+                    domain="[('is_occupied','=',True)]"
+                />
+                <filter
+                    name="filter_vacant"
+                    string="Vacant"
+                    domain="[('is_occupied','=',False)]"
+                />
+            </search>
+        </field>
+    </record>
+</odoo>
