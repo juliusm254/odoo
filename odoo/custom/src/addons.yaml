@@ -1,4 +1,4 @@
 # Kenyan localization
-l10n-kenya:
-  - l10n_ke
+# l10n-kenya:
+#   - l10n_ke
 # Overrides built-in l10n_es under odoo/addons
