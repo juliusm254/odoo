@@ -68,13 +68,13 @@ services:
       - --workers=2
       - --max-cron-threads=1
 
-  # db:
-  #   extends:
-  #     file: common.yaml
-  #     service: db
-  #   env_file:
-  #     - .docker/db-creation.env
-  #   restart: unless-stopped
+  db:
+    extends:
+      file: common.yaml
+      service: db
+    env_file:
+      - .docker/db-creation.env
+    restart: unless-stopped
 
   # smtp:
   #   extends:
