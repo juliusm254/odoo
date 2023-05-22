@@ -15,9 +15,9 @@ services:
       SMTP_PORT: "1025"
       SMTP_SERVER: smtplocal
     restart: unless-stopped
-    depends_on:
-      - db
-      - smtp
+    # depends_on:
+    #   - db
+    #   - smtp
     networks:
       default:
       globalwhitelist_shared:
@@ -68,69 +68,69 @@ services:
       - --workers=2
       - --max-cron-threads=1
 
-  db:
-    extends:
-      file: common.yaml
-      service: db
-    env_file:
-      - .docker/db-creation.env
-    restart: unless-stopped
+  # db:
+  #   extends:
+  #     file: common.yaml
+  #     service: db
+  #   env_file:
+  #     - .docker/db-creation.env
+  #   restart: unless-stopped
 
-  smtp:
-    extends:
-      file: common.yaml
-      service: smtpfake
-    restart: unless-stopped
-    networks:
-      default:
-        aliases:
-          - smtplocal
-      inverseproxy_shared:
-    labels:
-      doodba.domain.main: "dev.gechcode.com"
-      # traefik.docker.network: "inverseproxy_shared"
-      traefik.enable: "true"
-      traefik.domain: "dev.gechcode.com"
-      traefik.main-0.frontend.rule: Host:dev.gechcode.com
-      traefik.longpolling-0.frontend.rule: Host:dev.gechcode.com;Path:/longpolling/{anything:.*}
-      traefik.longpolling-0.port: 8072
+  # smtp:
+  #   extends:
+  #     file: common.yaml
+  #     service: smtpfake
+  #   restart: unless-stopped
+  #   networks:
+  #     default:
+  #       aliases:
+  #         - smtplocal
+  #     inverseproxy_shared:
+  #   labels:
+  #     doodba.domain.main: "dev.gechcode.com"
+  #     # traefik.docker.network: "inverseproxy_shared"
+  #     traefik.enable: "true"
+  #     traefik.domain: "dev.gechcode.com"
+  #     traefik.main-0.frontend.rule: Host:dev.gechcode.com
+  #     traefik.longpolling-0.frontend.rule: Host:dev.gechcode.com;Path:/longpolling/{anything:.*}
+  #     traefik.longpolling-0.port: 8072
 
-      traefik.frontend.passHostHeader: "true"
-      traefik.mailhog-0.frontend.rule: Host:dev.gechcode.com;PathPrefixStrip:/smtpfake/
-      traefik.mailhog-0.port: 8025
-      # Mailhog service
-      traefik.http.middlewares.oilandgas-15-0-test-mailhog-stripprefix.stripPrefix.prefixes: /smtpfake/
-      traefik.http.services.oilandgas-15-0-test-mailhog.loadbalancer.server.port: 8025
-      traefik.http.middlewares.oilandgas-15-0-test-buffering.buffering.retryExpression:
-        IsNetworkError() && Attempts() < 5
-      traefik.http.middlewares.oilandgas-15-0-test-compress.compress: "true"
-      ? traefik.http.middlewares.oilandgas-15-0-test-forbid-crawlers.headers.customResponseHeaders.X-Robots-Tag
-      : "noindex, nofollow"
-      traefik.http.middlewares.oilandgas-15-0-test-addSTS.headers.forceSTSHeader: "true"
-      traefik.http.middlewares.oilandgas-15-0-test-forceSecure.redirectScheme.scheme: https
-      traefik.http.middlewares.oilandgas-15-0-test-forceSecure.redirectScheme.permanent: "true"
-      traefik.http.routers.oilandgas-15-0-test-mailhog-0.rule:
-        Host(`dev.gechcode.com`) && PathPrefix(`/smtpfake/`)
-      traefik.http.routers.oilandgas-15-0-test-mailhog-0.service: oilandgas-15-0-test-mailhog
-      traefik.http.routers.oilandgas-15-0-test-mailhog-0.middlewares:
-        oilandgas-15-0-test-addSTS, oilandgas-15-0-test-buffering,
-        oilandgas-15-0-test-compress, oilandgas-15-0-test-forbid-crawlers,
-        oilandgas-15-0-test-forceSecure, oilandgas-15-0-test-mailhog-stripprefix
-      traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.rule:
-        Host(`dev.gechcode.com`) && PathPrefix(`/smtpfake/`)
-      traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.service: oilandgas-15-0-test-mailhog
-      traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.middlewares:
-        oilandgas-15-0-test-addSTS, oilandgas-15-0-test-buffering,
-        oilandgas-15-0-test-compress, oilandgas-15-0-test-forbid-crawlers,
-        oilandgas-15-0-test-forceSecure, oilandgas-15-0-test-mailhog-stripprefix
-      traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.tls: "true"
-      traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.tls.certResolver: letsencrypt
+  #     traefik.frontend.passHostHeader: "true"
+  #     traefik.mailhog-0.frontend.rule: Host:dev.gechcode.com;PathPrefixStrip:/smtpfake/
+  #     traefik.mailhog-0.port: 8025
+  #     # Mailhog service
+  #     traefik.http.middlewares.oilandgas-15-0-test-mailhog-stripprefix.stripPrefix.prefixes: /smtpfake/
+  #     traefik.http.services.oilandgas-15-0-test-mailhog.loadbalancer.server.port: 8025
+  #     traefik.http.middlewares.oilandgas-15-0-test-buffering.buffering.retryExpression:
+  #       IsNetworkError() && Attempts() < 5
+  #     traefik.http.middlewares.oilandgas-15-0-test-compress.compress: "true"
+  #     ? traefik.http.middlewares.oilandgas-15-0-test-forbid-crawlers.headers.customResponseHeaders.X-Robots-Tag
+  #     : "noindex, nofollow"
+  #     traefik.http.middlewares.oilandgas-15-0-test-addSTS.headers.forceSTSHeader: "true"
+  #     traefik.http.middlewares.oilandgas-15-0-test-forceSecure.redirectScheme.scheme: https
+  #     traefik.http.middlewares.oilandgas-15-0-test-forceSecure.redirectScheme.permanent: "true"
+  #     traefik.http.routers.oilandgas-15-0-test-mailhog-0.rule:
+  #       Host(`dev.gechcode.com`) && PathPrefix(`/smtpfake/`)
+  #     traefik.http.routers.oilandgas-15-0-test-mailhog-0.service: oilandgas-15-0-test-mailhog
+  #     traefik.http.routers.oilandgas-15-0-test-mailhog-0.middlewares:
+  #       oilandgas-15-0-test-addSTS, oilandgas-15-0-test-buffering,
+  #       oilandgas-15-0-test-compress, oilandgas-15-0-test-forbid-crawlers,
+  #       oilandgas-15-0-test-forceSecure, oilandgas-15-0-test-mailhog-stripprefix
+  #     traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.rule:
+  #       Host(`dev.gechcode.com`) && PathPrefix(`/smtpfake/`)
+  #     traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.service: oilandgas-15-0-test-mailhog
+  #     traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.middlewares:
+  #       oilandgas-15-0-test-addSTS, oilandgas-15-0-test-buffering,
+  #       oilandgas-15-0-test-compress, oilandgas-15-0-test-forbid-crawlers,
+  #       oilandgas-15-0-test-forceSecure, oilandgas-15-0-test-mailhog-stripprefix
+  #     traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.tls: "true"
+  #     traefik.http.routers.oilandgas-15-0-test-mailhog-secure-0.tls.certResolver: letsencrypt
 
-    volumes:
-      - "smtpconf:/etc/mailhog:ro,z"
-    entrypoint: [sh, -c]
-    command:
-      - test -r /etc/mailhog/auth && export MH_AUTH_FILE=/etc/mailhog/auth; exec MailHog
+  #   volumes:
+  #     - "smtpconf:/etc/mailhog:ro,z"
+  #   entrypoint: [sh, -c]
+  #   command:
+  #     - test -r /etc/mailhog/auth && export MH_AUTH_FILE=/etc/mailhog/auth; exec MailHog
 
 networks:
   default:
