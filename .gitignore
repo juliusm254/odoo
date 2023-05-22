@@ -32,9 +32,9 @@ doodba.odoo.code-workspace
 /.docker/
 
 # Environment-specific docker configurations
-./docker-compose.yml
-./prod.yaml
-./test.yaml
-./devel.yaml
+docker-compose.yml
+prod.yaml
+test.yaml
+devel.yaml
 #Portal files inly for Dev
 /portal
