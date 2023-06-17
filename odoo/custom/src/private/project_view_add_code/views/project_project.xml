@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- <record id="project_by_project_tree_view" model="ir.ui.view">
+        <field name="name">project.project.tree</field>
+        <field name="model">project.project</field>
+        <field name="arch" type="xml">
+            <tree string="Projects">
+                <field name="name"/>
+                <field name="parent_id"/>
+                <field name="z_code"/>
+            </tree>
+        </field>
+    </record> -->
+
+        <!--FILTER
+    VIEW-->
+    <record id="view_project_project_filter" model="ir.ui.view">
+        <field name="name">project.project.select</field>
+        <field name="model">project.project</field>
+        <field name="type">search</field>
+        <field name="inherit_id" ref="project.view_project_project_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='z_code']" position="replace">
+                <field name="name" />
+            </xpath>
+            <!-- <field name="name" position="after">
+                <field name="z_code" string="z_code" />
+            </field> -->
+        </field>
+    </record>
+
+    <record id="view_project_group_by_zcode" model="ir.ui.view">
+        <field name="name">project.project.group</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_project_filter" />
+        <field name="arch" type="xml">
+         <xpath expr="//group[@name='z_code']" position="replace">
+                <field name="name" />
+            </xpath>
+            <xpath expr="//filter[@name='z_code']" position="replace">
+                <filter
+                    string="Cashier"
+                    name="by_name"
+                    domain="[]"
+                    context="{'group_by': 'z_code'}"
+                />
+                <field name="name" />
+            </xpath>
+        </field>
+
+    </record>
+
+     <!-- <record id="projects_by_project" model="ir.actions.act_window">
+        <field name="name">Projects by Project</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.project</field>
+        <field name="view_id" ref="project_by_project_tree_view"/>
+        <field name="search_view_id" ref="view_project_group_by_zcode"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Add a new Project
+          </p><p>
+            You must define a conversion rate between several Units of
+            Measure within the same category.
+          </p>
+        </field>
+    </record>
+ -->
+
+</odoo>

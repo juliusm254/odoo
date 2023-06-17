@@ -843,8 +843,8 @@ def resetdb(
     else:
         modules = modules or "base"
     with c.cd(str(PROJECT_ROOT)):
-        c.run("docker-compose stop odoo", pty=True)
-        _run = "docker-compose run --rm -l traefik.enable=false odoo"
+        c.run("docker compose -f docker-compose.yml -p bim_dev stop odoo", pty=True)
+        _run = "docker compose -f docker-compose.yml -p bim_dev run --rm -l traefik.enable=false odoo"
         c.run(
             f"{_run} click-odoo-dropdb {dbname}",
             env=UID_ENV,
@@ -877,7 +877,7 @@ def preparedb(c):
         )
     with c.cd(str(PROJECT_ROOT)):
         c.run(
-            "docker-compose run --rm -l traefik.enable=false odoo preparedb",
+            "docker compose -f docker-compose.yml -p bim_dev run --rm -l traefik.enable=false odoo preparedb",
             env=UID_ENV,
             pty=True,
         )
