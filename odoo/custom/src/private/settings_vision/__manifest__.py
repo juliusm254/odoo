@@ -12,6 +12,7 @@
         "purchase_stock",
         "account",
         "stock_landed_costs",
+        "product_margin",
     ],
     "installable": True,
     "auto_install": True,
