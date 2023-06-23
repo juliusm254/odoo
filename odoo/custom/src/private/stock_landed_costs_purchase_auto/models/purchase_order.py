@@ -30,12 +30,30 @@ class PurchaseOrder(models.Model):
 
     def _create_picking_with_stock_landed_cost(self, picking):
         self.ensure_one()
-        landed_cost = (
-            self.env["stock.landed.cost"]
-            .with_company(self.company_id)
-            .create(self._prepare_landed_cost_values(picking))
+        product_category = self.env["product.category"].search(
+            [("name", "=", "LPG CATEGORY")]
         )
-        self.write({"landed_cost_ids": [(4, landed_cost.id)]})
+        products = self.env["product.product"].search(
+            [("categ_id", "in", product_category.ids), ("landed_cost_ok", "=", True)]
+        )
+        for product in products:
+            landed_cost = (
+                self.env["stock.landed.cost"]
+                .with_company(self.company_id)
+                .create(self._prepare_landed_cost_values(picking))
+            )
+            self.env["stock.landed.cost.lines"].create(
+                {
+                    "cost_id": landed_cost.id,
+                    "product_id": product.id,
+                    "name": product.name,
+                    "price_unit": 0.0,
+                    "split_method": "by_quantity",
+                    "account_id": 112,
+                    # "company_id": picking.company_id.id,
+                }
+            )
+            self.write({"landed_cost_ids": [(4, landed_cost.id)]})
 
     def _create_picking(self):
         all_pickings = self.mapped("picking_ids")
