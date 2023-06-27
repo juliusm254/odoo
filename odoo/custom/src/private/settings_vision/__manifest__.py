@@ -13,6 +13,7 @@
         "account",
         "stock_landed_costs",
         "product_margin",
+        "stock_landed_costs_purchase_auto",
     ],
     "installable": True,
     "auto_install": True,
