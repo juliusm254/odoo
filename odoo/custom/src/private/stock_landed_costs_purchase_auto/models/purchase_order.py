@@ -49,7 +49,7 @@ class PurchaseOrder(models.Model):
                     "name": product.name,
                     "price_unit": 0.0,
                     "split_method": "by_quantity",
-                    "account_id": 112,
+                    "account_id": 164,
                     # "company_id": picking.company_id.id,
                 }
             )
@@ -76,11 +76,7 @@ class PurchaseOrder(models.Model):
         action["context"] = {"search_default_purchase_id": self.id}
         return action
 
-    def create(self, vals):
-        po = super(PurchaseOrder, self).create(vals)
-        self.check_product_category_requirement(po)
-        return po
-
+    # TODO Dynamic function to check conditions for landed cost creation
     @staticmethod
     def check_product_category_requirement(po):
         for line in po.order_line:
