@@ -49,7 +49,7 @@ class PurchaseOrder(models.Model):
                     "name": product.name,
                     "price_unit": 0.0,
                     "split_method": "by_quantity",
-                    "account_id": 164,
+                    "account_id": 112,
                     # "company_id": picking.company_id.id,
                 }
             )

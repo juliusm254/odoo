@@ -455,7 +455,7 @@ def closed_prs(c):
 @task()
 def img_build(c, pull=True):
     """Build docker images."""
-    cmd = "docker-compose build"
+    cmd = "docker compose build"
     if pull:
         cmd += " --pull"
     with c.cd(str(PROJECT_ROOT)):
