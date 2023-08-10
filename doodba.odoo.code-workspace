@@ -1,15 +1,15 @@
 {
   "settings": {
     "python.autoComplete.extraPaths": [
-      "/root/odoo/odoo/custom/src/odoo"
+      "/home/jc/development/odoo/odoo/custom/src/odoo"
     ],
     "python.formatting.provider": "none",
     "python.linting.flake8Enabled": true,
     "python.linting.ignorePatterns": [
-      "/root/odoo/odoo/custom/src/odoo/**/*.py"
+      "/home/jc/development/odoo/odoo/custom/src/odoo/**/*.py"
     ],
     "python.linting.pylintArgs": [
-      "--init-hook=\"import sys;sys.path.append('/root/odoo/odoo/custom/src/odoo')\"",
+      "--init-hook=\"import sys;sys.path.append('/home/jc/development/odoo/odoo/custom/src/odoo')\"",
       "--load-plugins=pylint_odoo"
     ],
     "python.linting.pylintEnabled": true,
