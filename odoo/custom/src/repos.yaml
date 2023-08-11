@@ -34,20 +34,20 @@
 #   merges:
 #     - origin $ODOO_VERSION
 
-server-ux:
-  defaults:
-    depth: $DEPTH_MERGE
-  remotes:
-    origin: https://github.com/OCA/server-ux.git
-  target: origin $ODOO_VERSION
-  merges:
-    - origin $ODOO_VERSION
+# server-ux:
+#   defaults:
+#     depth: $DEPTH_MERGE
+#   remotes:
+#     origin: https://github.com/OCA/server-ux.git
+#   target: origin $ODOO_VERSION
+#   merges:
+#     - origin $ODOO_VERSION
 
-account-reconcile:
-  defaults:
-    depth: $DEPTH_MERGE
-  remotes:
-    origin: https://github.com/OCA/account-reconcile.git
-  target: origin $ODOO_VERSION
-  merges:
-    - origin $ODOO_VERSION
+# account-reconcile:
+#   defaults:
+#     depth: $DEPTH_MERGE
+#   remotes:
+#     origin: https://github.com/OCA/account-reconcile.git
+#   target: origin $ODOO_VERSION
+#   merges:
+#     - origin $ODOO_VERSION
