@@ -5,6 +5,7 @@
     "license": "AGPL-3",
     "summary": "Install custom settings for vision Energy",
     "depends": [
+        # OdooSA apps
         "stock",
         "l10n_ke",
         "purchase",
@@ -13,7 +14,7 @@
         "account",
         "stock_landed_costs",
         "product_margin",
-        "stock_landed_costs_purchase_auto",
+        # "stock_landed_costs_purchase_auto",
     ],
     "installable": True,
     "auto_install": True,
