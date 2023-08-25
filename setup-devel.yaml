@@ -11,12 +11,13 @@ version: "2.4"
 
 services:
   odoo:
+    # image:  :16.0
     build:
       context: ./odoo
       args:
         AGGREGATE: "false"
         DEPTH_DEFAULT: 100
-        ODOO_VERSION: "15.0"
+        ODOO_VERSION: "16.0"
         PYTHONOPTIMIZE: ""
         PIP_INSTALL_ODOO: "false"
         CLEAN: "false"
@@ -27,7 +28,6 @@ services:
       - public
     volumes:
       - ./odoo/custom/src:/opt/odoo/custom/src:rw,z
-      - "~/.gitconfig:/etc/gitconfig"
     environment:
       DEPTH_DEFAULT: 100
       # XXX Export these variables before running setup to own the files

@@ -2,10 +2,12 @@ version: "2.4"
 
 services:
   odoo:
+    # image:  :16.0
     build:
       context: ./odoo
       args:
-        ODOO_VERSION: "15.0"
+        DB_VERSION: "15"
+        ODOO_VERSION: "16.0"
         UID: "${UID:-1000}"
         GID: "${GID:-1000}"
     environment:
@@ -13,7 +15,7 @@ services:
       PGDATABASE: &dbname prod
       PGUSER: &dbuser "odoo"
       PROXY_MODE: "true"
-      LIST_DB: "false"
+      LIST_DB: "true"
     tty: true
     volumes:
       - filestore:/var/lib/odoo:z
@@ -24,7 +26,7 @@ services:
       traefik.port: "8069"
 
   db:
-    image: ghcr.io/tecnativa/postgres-autoconf:14-alpine
+    image: ghcr.io/tecnativa/postgres-autoconf:15-alpine
     shm_size: 4gb
     environment:
       POSTGRES_DB: *dbname

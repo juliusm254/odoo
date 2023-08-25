@@ -24,17 +24,7 @@
 /odoo/custom/src/private/.vscode/*
 /.venv
 /doodba.*.code-workspace
-/doodba.odoo.code-workspace
-doodba.odoo.code-workspace
 /src
 
 # Project-specific docker configurations
 /.docker/
-
-# Environment-specific docker configurations
-docker-compose.yml
-prod.yaml
-test.yaml
-devel.yaml
-#Portal files inly for Dev
-/portal
