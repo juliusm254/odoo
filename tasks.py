@@ -455,7 +455,7 @@ def closed_prs(c):
 @task()
 def img_build(c, pull=True):
     """Build docker images."""
-    cmd = "docker-compose build"
+    cmd = "sudo docker-compose build"
     if pull:
         cmd += " --pull"
     with c.cd(str(PROJECT_ROOT)):
@@ -466,7 +466,7 @@ def img_build(c, pull=True):
 def img_pull(c):
     """Pull docker images."""
     with c.cd(str(PROJECT_ROOT)):
-        c.run("docker-compose pull", pty=True)
+        c.run("sudo docker-compose pull", pty=True)
 
 
 @task()
@@ -565,7 +565,7 @@ def install(
     if modules:
         cmd += f" -w {modules}"
     with c.cd(str(PROJECT_ROOT)):
-        c.run("docker-compose stop odoo")
+        c.run("sudo docker-compose stop odoo")
         c.run(
             cmd,
             env=UID_ENV,
@@ -843,8 +843,11 @@ def resetdb(
     else:
         modules = modules or "base"
     with c.cd(str(PROJECT_ROOT)):
-        c.run("docker-compose stop odoo", pty=True)
-        _run = "docker-compose run --rm -l traefik.enable=false odoo"
+        c.run(
+            "sudo docker-compose -f docker-compose.yml -p bim_dev stop odoo", pty=True
+        )
+        _run = "sudo docker-compose -f docker-compose.yml -p bim_dev \
+              run --rm -l traefik.enable=false odoo"
         c.run(
             f"{_run} click-odoo-dropdb {dbname}",
             env=UID_ENV,
@@ -852,7 +855,7 @@ def resetdb(
             pty=True,
         )
         c.run(
-            f"{_run} click-odoo-initdb -n {dbname} -m {modules}",
+            f"{_run} click-odoo-initdb -n {dbname} -m {modules} --no-demo",
             env=UID_ENV,
             pty=True,
         )
@@ -877,7 +880,8 @@ def preparedb(c):
         )
     with c.cd(str(PROJECT_ROOT)):
         c.run(
-            "docker-compose run --rm -l traefik.enable=false odoo preparedb",
+            "docker compose -f docker-compose.yml -p bim_dev \
+                run --rm -l traefik.enable=false odoo preparedb",
             env=UID_ENV,
             pty=True,
         )
@@ -886,7 +890,7 @@ def preparedb(c):
 @task()
 def restart(c, quick=True):
     """Restart odoo container(s)."""
-    cmd = "docker-compose restart"
+    cmd = "sudo docker-compose restart"
     if quick:
         cmd = f"{cmd} -t0"
     cmd = f"{cmd} odoo odoo_proxy"
@@ -976,7 +980,7 @@ def snapshot(
         )
         if "Stopping" in cur_state:
             # Restart services if they were previously active
-            c.run("docker-compose start odoo db", pty=True)
+            c.run("sudo docker-compose start odoo db", pty=True)
 
 
 @task(
@@ -1039,4 +1043,4 @@ def restore_snapshot(
         )
         if "Stopping" in cur_state:
             # Restart services if they were previously active
-            c.run("docker-compose start odoo db", pty=True)
+            c.run("sudo docker-compose start odoo db", pty=True)
