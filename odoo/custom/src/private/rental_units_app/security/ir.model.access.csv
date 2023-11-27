@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_rental_unit,Rental Admin,model_rental_unit,base.group_user,1,1,1,1
-access_rental_unit_product,Access Rental Unit Product,model_rental_unit_product,base.group_user,1,1,1,1
