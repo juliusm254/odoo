@@ -134,7 +134,7 @@
                         type="action"
                         class="oe_edit_only btn btn-primary"
                     />
-                    <field name="contract_ids" readonly="1" />
+                    <field name="contract_ids" readonly="0" />
                 </page>
             </notebook>
             <field name="size" position="replace">

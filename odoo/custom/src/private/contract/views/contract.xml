@@ -182,6 +182,7 @@
                     </group>
                     <group col="4" name="recurring_type" string="Recurring Type">
                         <field name="generation_type" />
+                        <field name="contract_type" />
                     </group>
                     <notebook>
                         <page name="recurring_invoice_line" string="Recurring Invoices">

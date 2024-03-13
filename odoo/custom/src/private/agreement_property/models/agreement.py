@@ -20,6 +20,14 @@ class AgreementProperty(models.Model):
         default=None,
     )
 
+    property_building_unit_id = fields.Many2one(
+        "rental.unit",
+        string="Unit",
+        required=False,
+        default=None,
+        domain="[('related_property_id', '=', property_id),('is_occupied', '=', False)]",
+    )
+
     @api.depends("property_id", "property_id.municipality_id")
     def _municipality(self):
         for record in self:

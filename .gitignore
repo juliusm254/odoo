@@ -26,6 +26,7 @@
 /doodba.*.code-workspace
 /src
 /tobedeleted
+/venv
 
 # Project-specific docker configurations
 /.docker/

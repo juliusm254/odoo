@@ -36,17 +36,17 @@ class PricelistConsumerPriceIndexItem(models.Model):
             _logger.warning(e)
         return 0
 
-    def _compute_price(self, price, price_uom, product, quantity=1.0, partner=False):
+    def _compute_price(self, target_uom, product, qty=1.0, date=None, currency=None):
         _logger.warning("Computing price")
         if self.compute_price != "by_index":
             _logger.warning("Uninteresting calculation")
             return super(PricelistConsumerPriceIndexItem, self)._compute_price(
-                price, price_uom, product, quantity, partner
+                target_uom, product, qty, date, currency
             )
         self.ensure_one()
         base_price = self.fixed_price
         price = product.uom_id._compute_price(
-            base_price, price_uom
+            base_price, target_uom
         ) * self._get_multiplier_for_year(self.date_start.year)
         _logger.warning(
             f"Got the {price=} from {base_price=}, {price_uom=} {self._get_multiplier_for_year(self.date_start.year)=}"
